@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
-   /* display: flex;
-  justify-content: space-between;  */
+   
+  justify-content: space-between;  
   background-color: #111;
-   ;
+  
+   
   
 `;

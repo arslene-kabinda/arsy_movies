@@ -9,7 +9,7 @@ const Home = () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}`
     );
-    setTrending(data.results.slice(0, 20));
+    setTrending(data.results.slice(0, 10));
     console.log(data.results);
   };
 
@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
   return (
     <HomeContainer className="container">
-      <h1>Welcome to Arsy Movies</h1>
+      <h1>Welcome to Arsy Movies !</h1>
       <Carousel trending={trending} />
     </HomeContainer>
   );
