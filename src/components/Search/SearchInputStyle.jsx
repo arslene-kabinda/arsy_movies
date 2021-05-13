@@ -6,7 +6,7 @@ export const SearchInputStyle = styled.form`
   color: white;
   font-size: 15px;
   border-radius: 10px;
-
+  padding-top: 100px;
   input {
     padding: 10px;
     border: none !important;
@@ -15,7 +15,7 @@ export const SearchInputStyle = styled.form`
 
   input:focus {
     padding: 10px;
-    outline:none;
+    outline: none;
     background-color: transparent;
   }
 `;

@@ -11,26 +11,32 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [numberOfPage, setNumberOfPage] = useState();
   const [genreId, setGenreId] = useState("");
-  const [searchItem, setSearchItem] = useState([]);
+  const [searchItem, setSearchItem] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchMovies = async () => {
+    setLoading(true);
+    console.log(loading);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}&page=${page}&with_watch_monetization_types=flatrate`
     );
+    setLoading(false);
+    console.log(loading);
     setMovies(data.results);
     setNumberOfPage(data.total_pages);
   };
+
   const SearchApi = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false&query=`
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false&query=${searchItem}`
     );
-    setSearchItem(data);
-    console.log(data);
+    setSearchItem(data.results);
+    console.log(data.results);
   };
 
   useEffect(() => {
     fetchMovies();
-    SearchApi();
+    //SearchApi();
 
     // eslint-disable-next-line
   }, [page, genreId]);
@@ -39,27 +45,34 @@ const Movies = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    SearchApi(searchItem);
-    
+    SearchApi();
   };
-  const handleChange = (e) =>{
-    searchItem()
-
-  }
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchItem(e.target.value);
+  };
 
   return (
     <div>
-      <SearchInput
-        onChange={handleChange}
+      <form
         onSubmit={handleSubmit}
-        value="searchItem"
-      />
+        style={{ backgroundColor: "fff", marginTop: "100px" }}
+      >
+        <input
+          type="text"
+          value={searchItem}
+          onChange={handleChange}
+          placeholder="Search Movie"
+        />
+      </form>
       <ListOfCategories
         onClickShowCategory={onClickShowCategory}
         mediaType="movie"
       />
       <MoviesContainer className="container d-flex">
-        {movies &&
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
           movies.map((movie) => (
             <Card
               key={movie.id}
@@ -70,7 +83,8 @@ const Movies = () => {
               media_type="movie"
               vote_average={movie.vote_average}
             />
-          ))}
+          ))
+        )}
       </MoviesContainer>
       {numberOfPage > 1 && (
         <CustomPagination setPage={setPage} numberOfPage={numberOfPage} />
