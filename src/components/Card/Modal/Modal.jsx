@@ -41,7 +41,7 @@ export default function ModalContainer({ children, media_type, id }) {
   const [content, setContent] = useState();
   const [cast, setCast] = useState([]);
   const [videos, setVideos] = useState([]);
-  const [similar, setSimilar] = useState([]);
+  const [similars, setSimilars] = useState([]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -72,8 +72,8 @@ export default function ModalContainer({ children, media_type, id }) {
     const { data } = await axios.get(
       `    https://api.themoviedb.org/3/${media_type}/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
     );
-    setSimilar(data.results)
-    console.log(data.results)
+    setSimilars(data.results)
+    // console.log(data.results)
   };
 
   useEffect(() => {
@@ -162,7 +162,7 @@ export default function ModalContainer({ children, media_type, id }) {
                     <p>{cst.character}</p>
                   ))}
                 </div> */}
-                <div>
+                {/* <div>
                   {videos === undefined ? (
                     "video indisponible"
                   ) : (
@@ -176,6 +176,11 @@ export default function ModalContainer({ children, media_type, id }) {
                       allowFullScreen
                     ></iframe>
                   )}
+                </div> */}
+                <div>
+                  {similars.map((similar) => (
+                    <p>{similar.overview}</p>
+                  ))}
                 </div>
               </div>
             </div>

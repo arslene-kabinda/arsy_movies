@@ -12,12 +12,11 @@ code {
 }
 .navbar {
   justify-content: space-between !important;
-  background-color: black;
- 
 }
 .nav-link {
-  color: #ffef60 !important;
-  
+  background-color: transparent;
+  color: #09C5F5 !important;
+  border: none !important;
 }
 .nav-link:hover {
   color: #fff !important;

@@ -3,15 +3,17 @@ import axios from "axios";
 import Card from "../../components/Card/Card";
 import { MoviesContainer } from "./MovieStyle";
 import CustomPagination from "../../components/Pagination/Pagination";
+import ListOfCategories from "../../components/Categories/ListOfCategories";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [numberOfPage, setNumberOfPage] = useState();
+  const [genreId, setGenreId] = useState("");
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=20805a09b491c1d079296a261a00cc2e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`
+      `https://api.themoviedb.org/3/discover/movie?api_key=20805a09b491c1d079296a261a00cc2e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}&page=${page}&with_watch_monetization_types=flatrate`
     );
     setMovies(data.results);
     setNumberOfPage(data.total_pages);
@@ -20,10 +22,17 @@ const Movies = () => {
   useEffect(() => {
     fetchMovies();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, genreId]);
+  const onClickShowCategory = (id) => {
+    setGenreId(id);
+  };
 
   return (
     <div>
+      <ListOfCategories
+        onClickShowCategory={onClickShowCategory}
+        mediaType="movies"
+      />
       <MoviesContainer className="container d-flex">
         {movies &&
           movies.map((movie) => (
