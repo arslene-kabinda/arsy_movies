@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MenuStyle } from "../Style/MenuStyle";
 
 import { Icon, InlineIcon } from "@iconify/react";
@@ -7,10 +7,12 @@ import homeOutlined from "@iconify-icons/ant-design/home-outlined";
 import bxMoviePlay from "@iconify-icons/bx/bx-movie-play";
 
 import saveSeries from "@iconify-icons/carbon/save-series";
+import SearchInput from "../../Search/SearchInput";
 
 import movieIcon from "@iconify-icons/cil/movie";
 
 const Menu = () => {
+  const location = useLocation();
   return (
     <div id="navbarSupportedContent">
       <MenuStyle className="d-flex">
@@ -39,6 +41,7 @@ const Menu = () => {
             </div>
           </Link>
         </li>
+        {/* {location.pathname === "/movies" && <SearchInput />} */}
       </MenuStyle>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, InlineIcon } from "@iconify/react";
 import searchIcon from "@iconify-icons/akar-icons/search";
-import { SearchInputStyle } from "../Style/SearchInputStyle";
+import  {SearchInputStyle}  from "../Search/SearchInputStyle";
 
 const SearchInput = ({handleSubmit,handleChange,value}) => {
   return (

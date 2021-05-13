@@ -3,7 +3,7 @@ import React from "react";
 const CategorieMovies = ({ name, id, onClickShowCategory }) => {
   return (
     <button
-      className="btn btn-secondary"
+      className="btn-secondary"
       onClick={() => onClickShowCategory(id)}
     >
       {name}
