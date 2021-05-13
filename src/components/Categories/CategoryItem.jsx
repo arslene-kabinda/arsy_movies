@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const CategorieMovies = ({name, id , onClickShowCategory}) => {
-    return (
-        <div>
-            <button className="btn col col-md-2" onClick={()=>onClickShowCategory(id)}>{name}</button>
-        </div>
-    )
-}
+const CategorieMovies = ({ name, id, onClickShowCategory }) => {
+  return (
+    <button
+      className="btn btn-secondary"
+      onClick={() => onClickShowCategory(id)}
+    >
+      {name}
+    </button>
+  );
+};
 
-export default CategorieMovies
+export default CategorieMovies;

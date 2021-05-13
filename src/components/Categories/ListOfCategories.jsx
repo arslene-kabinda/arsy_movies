@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import CaregoryItem from "./CategoryItem";
 import axios from "axios";
+import { ContainerStyle } from "./ContainerStyle";
 
 const ListOfCategories = ({ onClickShowCategory, mediaType }) => {
   const [categories, setCategories] = useState([]);
@@ -15,20 +16,19 @@ const ListOfCategories = ({ onClickShowCategory, mediaType }) => {
     fetchCategories();
   }, []);
   return (
-    <div>
-      <h1 className="text-align"></h1>
-      <div className="container  text-align">
-        <div className="row  justify-content-md-center">
-          {categories.map((categorie) => (
+    <ContainerStyle className="container">
+      <div className="row row-cols-auto ">
+        {categories.map((categorie) => (
+          <div className="col pt-2">
             <CaregoryItem
               key={categorie.id}
               {...categorie}
               onClickShowCategory={onClickShowCategory}
             />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </ContainerStyle>
   );
 };
 

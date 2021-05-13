@@ -31,7 +31,7 @@ const Movies = () => {
     <div>
       <ListOfCategories
         onClickShowCategory={onClickShowCategory}
-        mediaType="movies"
+        mediaType="movie"
       />
       <MoviesContainer className="container d-flex">
         {movies &&
