@@ -23,11 +23,12 @@ export default function CustomPagination({ setPage, numberOfPage = 10 }) {
     >
       <ThemeProvider theme={darkTheme}>
         <Pagination
-          onChange={(e) => handlePageChange(e.target.textContent)}
+          onChange={(event) => handlePageChange(event.target.textContent)}
           count={numberOfPage}
           color="primary"
-          // hideNextButton
-          // hidePrevButton
+          variant="outlined"
+          hideNextButton
+          hidePrevButton
         />
       </ThemeProvider>
     </div>

@@ -5,5 +5,4 @@ export const SeriesContainer = styled.div`
 
   margin-top: 87px;
   background-color: #111;
- 
 `;

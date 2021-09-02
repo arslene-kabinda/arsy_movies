@@ -1,49 +1,54 @@
 import { Link, useLocation } from "react-router-dom";
 import { MenuStyle } from "../Style/MenuStyle";
 
-import { Icon, InlineIcon } from "@iconify/react";
-import homeOutlined from "@iconify-icons/ant-design/home-outlined";
-
-import bxMoviePlay from "@iconify-icons/bx/bx-movie-play";
-
-import saveSeries from "@iconify-icons/carbon/save-series";
-import SearchInput from "../../Search/SearchInput";
-
-import movieIcon from "@iconify-icons/cil/movie";
+import SearchIcon from "@material-ui/icons/Search";
 
 const Menu = () => {
   const location = useLocation();
   return (
-    <div id="navbarSupportedContent">
-      <MenuStyle className="d-flex">
-        <li className="nav-item">
-          <Link to="/" className="nav-link active" aria-current="page">
-            <div className="d-flex">
-              <Icon className="icon" icon={homeOutlined} />
-              Home
-            </div>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/movies" className="nav-link">
-            <div className="d-flex">
-              <Icon className="icon" icon={bxMoviePlay} />
-              Movies
-            </div>
-          </Link>
-        </li>
+    <nav class="navbar navbar-expand-lg  ">
+      <div class="container">
+        <button
+          class="navbar-toggler bg-light"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarButtonsExample"
+          aria-controls="navbarButtonsExample"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
 
-        <li className="nav-item">
-          <Link to="/series" className="nav-link ">
-            <div className="d-flex">
-              <Icon className="icon" icon={saveSeries} />
-              Series
-            </div>
-          </Link>
-        </li>
-        {/* {location.pathname === "/movies" && <SearchInput />} */}
-      </MenuStyle>
-    </div>
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page">
+                <div className="d-flex">Home</div>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/movies" className="nav-link">
+                <div className="d-flex">Movies</div>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/series" className="nav-link ">
+                <div className="d-flex">Tv Series</div>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/search" className="nav-link ">
+                <div className="d-flex">
+                  {<SearchIcon />}
+                  Search
+                </div>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

@@ -1,34 +1,40 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import CaregoryItem from "./CategoryItem";
+import React, { useState, useEffect } from "react";
+import Category from "./CategoryItem";
 import axios from "axios";
 import { ContainerStyle } from "./ContainerStyle";
 
 const ListOfCategories = ({ onClickShowCategory, mediaType }) => {
   const [categories, setCategories] = useState([]);
-  const fetchCategories = async () => {
+  const fetchGenres = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/genre/${mediaType}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&include_adult=false`
     );
+
     setCategories(data.genres);
   };
   useEffect(() => {
-    fetchCategories();
+    fetchGenres();
   }, []);
+
   return (
-    <ContainerStyle className="container">
-      <div className="row row-cols-auto ">
-        {categories.map((categorie) => (
-          <div className="col pt-2">
-            <CaregoryItem
-              key={categorie.id}
-              {...categorie}
+    <div>
+      <ContainerStyle className="container">
+        <div className="title">
+          <h1> <span>Cate</span>gories</h1>
+        </div>
+
+        <div className="row row-cols-auto ">
+          {categories.map((Categorie) => (
+            <Category
+              className="col pt-2 bg"
+              key={Categorie.id}
+              {...Categorie}
               onClickShowCategory={onClickShowCategory}
             />
-          </div>
-        ))}
-      </div>
-    </ContainerStyle>
+          ))}
+        </div>
+      </ContainerStyle>
+    </div>
   );
 };
 

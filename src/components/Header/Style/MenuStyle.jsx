@@ -13,4 +13,9 @@ export const MenuStyle = styled.ul`
   .icon {
     font-size: 20px;
   }
+  @media (max-width: 767px) {
+    .icon {
+      font-size: 15px;
+    }
+  }
 `;

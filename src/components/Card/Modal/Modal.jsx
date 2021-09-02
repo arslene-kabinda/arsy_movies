@@ -4,8 +4,11 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import axios from "axios";
-import { ModalTitle } from "./ModalTitle";
-const imageFromAPI = "https://image.tmdb.org/t/p/w300";
+import "./ModalStyle.css";
+import { Button } from "@material-ui/core";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import Casting from "../../Carousel/Casting/Casting";
+const imageFromAPI = "https://image.tmdb.org/t/p/w500";
 const unavailable = "https://www.movienewz.com/img/films/poster-holder.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,20 +18,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    width: "80%",
+    width: "90%",
     height: "80%",
-    display: "flex",
-
-    justifyContent: "space-around",
+    border: "1px solid #000",
     backgroundColor: "#111",
-    border: "1px solid #282C34",
-    // borderRadius: 30,
+    borderRadius: 10,
     color: "white",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 1, 3),
   },
   image: {
     borderRadius: 5,
+    width: "20%",
   },
   modalContent: {
     width: "70%",
@@ -39,8 +40,8 @@ export default function ModalContainer({ children, media_type, id }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
-  const [cast, setCast] = useState([]);
-  const [videos, setVideos] = useState([]);
+
+  const [video, setVideo] = useState([]);
   const [similars, setSimilars] = useState([]);
   const handleOpen = () => {
     setOpen(true);
@@ -55,32 +56,23 @@ export default function ModalContainer({ children, media_type, id }) {
     setContent(data);
   };
 
-  const getCast = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=fr`
-    );
-    setCast(data.cast);
-    // console.log(data.cast);
-  };
-  const getVideos = async () => {
+  const fetchVideos = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=fr`
     );
-    setVideos(data ? data.results[0]?.key : " ");
+    setVideo(data ? data.results[0]?.key : " ");
   };
   const getSimilar = async () => {
     const { data } = await axios.get(
       `    https://api.themoviedb.org/3/${media_type}/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
     );
-    setSimilars(data.results)
-    // console.log(data.results)
+    setSimilars(data.results);
   };
 
   useEffect(() => {
     fetchData();
-    getCast();
-    getVideos();
-    getSimilar()
+    fetchVideos();
+    getSimilar();
     // eslint-disable-next-line
   }, []);
   return (
@@ -108,80 +100,61 @@ export default function ModalContainer({ children, media_type, id }) {
         <Fade in={open}>
           {content && (
             <div className={classes.paper}>
-              {" "}
-              <div>
-                {content.poster_path && (
-                  <img
-                    className={classes.image}
-                    src={
-                      content.poster_path
-                        ? `${imageFromAPI}/${content.poster_path}`
-                        : unavailable
-                    }
-                    alt={content.title}
-                  />
-                )}
-              </div>
-              <div className={classes.modalContent}>
-                <ModalTitle>
-                  {
-                    <span>
-                      {" "}
-                      Title: {content.title ? content.title : content.name}
-                    </span>
+              <div className="contentModal">
+                <img
+                  className="contentModal__poster"
+                  src={
+                    content.poster_path
+                      ? `${imageFromAPI}/${content.poster_path}`
+                      : unavailable
                   }
-                </ModalTitle>
-                <p>
-                  {content.overview && (
-                    <span>
-                      <strong> Overview:</strong> {content.overview}
-                    </span>
-                  )}
-                </p>
-                <p>
-                  {
-                    <span>
-                      {" "}
-                      <strong>Release date</strong>:{" "}
-                      {content.release_date
-                        ? content.release_date
-                        : content.last_air_date}
-                    </span>
+                  alt={content.name || content.title}
+                />
+                <img
+                  className="contentModal__landscape"
+                  src={
+                    content.backdrop_path
+                      ? `${imageFromAPI}/${content.backdrop_path}`
+                      : unavailable
                   }
-                </p>
-                <p>
+                  alt={content.name || content.title}
+                />
+                <div className="contentModal__about">
+                  <span className="contentModal__title">
+                    {content.name || content.title}(
+                    {(
+                      content.first_air_date ||
+                      content.release_date ||
+                      "...."
+                    ).substring(0, 4)}
+                    )
+                  </span>
                   {content.tagline && (
-                    <span>
-                      {" "}
-                      <strong>Tagline:</strong> {content.tagline}
-                    </span>
+                    <i className="tagline">{content.tagline} </i>
                   )}
-                </p>
-                {/* <div>
-                  {cast.map((cst) => (
-                    <p>{cst.character}</p>
-                  ))}
-                </div> */}
-                {/* <div>
-                  {videos === undefined ? (
-                    "video indisponible"
-                  ) : (
-                    <iframe
-                      width="400"
-                      height="315"
-                      src={`https://www.youtube.com/embed/${videos}`}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  )}
-                </div> */}
-                <div>
-                  {similars.map((similar) => (
-                    <p>{similar.overview}</p>
-                  ))}
+                  <span className="contentModal__description">
+                    {content.overview}
+                  </span>
+                  <div>
+                    <Casting media_type={media_type} id={id} />
+                  </div>
+
+                  <Button
+                    variant="contained"
+                    startIcon={<YouTubeIcon />}
+                    color="secondary"
+                    target="__blank"
+                    href={`https://www.youtube.com/watch?v=${video}`}
+                  >
+                    Watch the Trailer
+                  </Button>
                 </div>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  aria-label="Close"
+                  data-dismiss="alert"
+                ></button>
               </div>
             </div>
           )}

@@ -1,13 +1,18 @@
-import React from 'react'
-import logo from '../../../assets/logo.png'
-import {LogoStyle} from '../Style/LogoStyle' 
+import React from "react";
+import { LogoStyle } from "../Style/LogoStyle";
+
+import { Icon, InlineIcon } from "@iconify/react";
+import moviesAndTv16Regular from "@iconify-icons/fluent/movies-and-tv-16-regular";
+import logoSite from "../../../assets/logoSite.png"
 
 const Logo = () => {
-    return (
-        <LogoStyle>
-           <img src={logo} alt="logoSite"/> 
-        </LogoStyle>
-    )
-}
+  return (
+    <LogoStyle>
+      {/* <Icon icon={moviesAndTv16Regular} className="icon" />
+      Entertainement Hub */}
+      <img src={logoSite} alt="logo du site"/>
+    </LogoStyle>
+  );
+};
 
-export default Logo
+export default Logo;

@@ -1,5 +1,6 @@
 @import "react-alice-carousel/lib/alice-carousel.css";
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sail&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -15,9 +16,10 @@ code {
 }
 .nav-link {
   background-color: transparent;
-  color: #09C5F5 !important;
+  color: #fff !important;
   border: none !important;
+  font-family: "Montserrat", sans-serif;
 }
 .nav-link:hover {
-  color: #fff !important;
+  color: #4e0097 !important;
 }
