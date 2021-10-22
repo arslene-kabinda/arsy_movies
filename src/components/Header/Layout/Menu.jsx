@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLocation } from "react-router-dom";
-import { MenuStyle } from "../Style/MenuStyle";
+// import { MenuStyle } from "../Style/MenuStyle";
 
 import SearchIcon from "@material-ui/icons/Search";
 
 const Menu = () => {
-  const location = useLocation();
+
   return (
     <nav class="navbar navbar-expand-lg  ">
       <div class="container">

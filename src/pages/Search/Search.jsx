@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import axios from "axios";
 import { ContainerSearch } from "./SearchStyle";
@@ -7,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 import { Button, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Tabs, Tab } from "@material-ui/core";
-import { Movie } from "@material-ui/icons";
+
 import Card from "../../components/Card/Card";
 import CustomPagination from "../../components/Pagination/Pagination";
 const Search = () => {

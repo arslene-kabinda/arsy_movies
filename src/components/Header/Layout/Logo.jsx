@@ -1,8 +1,5 @@
 import React from "react";
 import { LogoStyle } from "../Style/LogoStyle";
-
-import { Icon, InlineIcon } from "@iconify/react";
-import moviesAndTv16Regular from "@iconify-icons/fluent/movies-and-tv-16-regular";
 import logoSite from "../../../assets/logoSite.png"
 
 const Logo = () => {

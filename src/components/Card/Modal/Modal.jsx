@@ -42,7 +42,7 @@ export default function ModalContainer({ children, media_type, id }) {
   const [content, setContent] = useState();
 
   const [video, setVideo] = useState([]);
-  const [similars, setSimilars] = useState([]);
+  // const [similars, setSimilars] = useState([]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -62,17 +62,17 @@ export default function ModalContainer({ children, media_type, id }) {
     );
     setVideo(data ? data.results[0]?.key : " ");
   };
-  const getSimilar = async () => {
-    const { data } = await axios.get(
-      `    https://api.themoviedb.org/3/${media_type}/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
-    );
-    setSimilars(data.results);
-  };
+  // const getSimilar = async () => {
+  //   const { data } = await axios.get(
+  //     `    https://api.themoviedb.org/3/${media_type}/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
+  //   );
+  //   setSimilars(data.results);
+  // };
 
   useEffect(() => {
     fetchData();
     fetchVideos();
-    getSimilar();
+    // getSimilar();
     // eslint-disable-next-line
   }, []);
   return (
