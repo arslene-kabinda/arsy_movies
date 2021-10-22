@@ -24,7 +24,7 @@ const Movies = () => {
     setLoading(false);
 
     setMovies(data.results);
-    console.log(data.results)
+    console.log(data.results);
     setNumberOfPage(data.total_pages);
   };
 
@@ -123,17 +123,21 @@ const Movies = () => {
         mediaType="movie"
       />
       <MoviesContainer className="container d-flex">
-        {movies.map((movie) => (
-          <Card
-            key={movie.id}
-            id={movie.id}
-            poster={movie.poster_path}
-            title={movie.title || movie.name}
-            date={movie.first_air_date || movie.release_date}
-            media_type="movie"
-            vote_average={movie.vote_average}
-          />
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          movies.map((movie) => (
+            <Card
+              key={movie.id}
+              id={movie.id}
+              poster={movie.poster_path}
+              title={movie.title || movie.name}
+              date={movie.first_air_date || movie.release_date}
+              media_type="movie"
+              vote_average={movie.vote_average}
+            />
+          ))
+        )}
       </MoviesContainer>
       {numberOfPage > 1 && (
         <CustomPagination setPage={setPage} numberOfPage={numberOfPage} />

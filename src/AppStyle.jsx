@@ -7,8 +7,6 @@ export const AppContainer = styled.div`
 
   margin-top: 100px;
 
-  border: 2px solid green;
-
   .loader {
     position: absolute;
     left: 50%;

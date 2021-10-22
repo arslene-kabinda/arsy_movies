@@ -71,7 +71,7 @@ const Series = () => {
               <ReactPlayer
                 controls={true}
                 url={`https://www.youtube.com/watch?v=bPYnXiOVTvQ`}
-                className="w-100 "
+                className="w-100  video"
                 height="600px"
               />
             </ContainerReactPlayer>

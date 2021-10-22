@@ -10,21 +10,29 @@ export const HomeContainer = styled.div`
     color: #4e0097;
     font-weight: bold;
   }
-  .container {
+  .flex {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .carousel {
     width: 100px;
   }
-  .card_content {
-    width: 100% important!;
-    border: 10px solid purple;
-    margin:10px;
+  .card {
+    margin: 10px;
+    width: 20%;
+    height: 300px;
+    .card_content {
+      width: 100% !important;
+    }
   }
-  
+
   @media (max-width: 767px) {
     h1 {
       font-size: 20px;
